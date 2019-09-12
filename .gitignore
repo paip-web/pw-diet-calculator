@@ -279,3 +279,8 @@ $RECYCLE.BIN/
 *.dev.patch
 *.test.patch
 http-client.private.env.json
+
+### Ignore IDE Configuration
+.vscode
+.idea
+pw-diet-calculator.iml
