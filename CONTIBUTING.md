@@ -6,31 +6,27 @@ Contributions are welcome, and they are greatly appreciated!
 
 Every little bit helps a lot, and credit will always be given.
 
-## How can i contribute?
+## How can i contribute
 
 You can contribute and help in many ways.
 
-## Types of Contributions
+### Types of Contributions
 
-### Submit Feedback
+#### Submit Feedback
 
-The best way to send feedback is to file an issue at https://gitlab.com/paip-web/pwbs/issues .
-
-Issue template is in another section of that document.
+The best way to send feedback is to file an issue at [GitHub](https://github.com/patrykjadamczyk/pw-diet-calculator/issues).
 
 If you are proposing a feature explain in detail how it would work.
 
-### Write Documentation
+#### Write Documentation
 
-PWBS (PAiP Web Build System) could always use more documentation and always can have better constructed documentation. Whether as part of official PWBS docs, in docstrings, or even on the web in blog posts, articles, and such.
+PW Diet Calculator could always use more documentation and always can have better constructed documentation. Whether as part of official docs, in documentation comments, or even on the web in blog posts, articles, and such.
 
 If you find mistyped word then file an issue or change and submit merge request.
 
-### Report Bugs
+#### Report Bugs
 
-Report bugs at https://gitlab.com/paip-web/pwbs/issues .
-
-Issue template is in another section of that document.
+Report bugs at [GitHub](https://github.com/patrykjadamczyk/pw-diet-calculator/issues).
 
 If you are reporting a bug, please include:
 
@@ -40,43 +36,39 @@ If you are reporting a bug, please include:
 
 * Detailed steps to reproduce bug.
 
-### Fix Bugs
+#### Fix Bugs
 
-Look through the GitLab issues for bugs. Anything tagged with "bug" is open to whoever wants to implement it.
+Look through the [GitHub issues](https://github.com/patrykjadamczyk/pw-diet-calculator/issues) for bugs. Anything tagged with ["bug"](https://github.com/patrykjadamczyk/pw-diet-calculator/labels/bug) is open to whoever wants to implement it.
 
-### Implement Features
+#### Implement Features
 
-Look through the Roadmap in documentation and check what wasn't done. Everything what will be there is open to whoever wants to implement it.
+Look through the Roadmap in [Trello](https://trello.com/b/ptN1Rz32/pw-diet-calculator) and check what is in Backlogs. Everything what will be there is open to whoever wants to implement it.
 
 ## Rules and Additional Information
 
 ### Rules
 
-### Pull Request Guidelines
+#### PAiP Web Developer Guide
+
+[Here](https://github.com/patrykjadamczyk/pw-devguide/blob/version/1/README.md) is guide where is written somethings you need to look out for.
+This guide is still being built so changes may happen to it.
+
+#### Pull Request Guidelines
 
 Before you submit a pull request, check that it meets these guidelines:
 
 1. The pull request should include tests.
 
 2. Add your changes to ChangeLogs
-    * docs/source/n_changelog.rst (Every even small change)
+    * CHANGELOG.md
 
-    * HISTORY.rst (For every big change in functionality)
+    * {sub-project}/CHANGELOG.md
 
-3. The pull request should work for Python >= 3.6 and be OS independent.
+3. The pull request should be with clean code.
 
-### Tests
+#### Tests
 
-To run tests run any of these:
-
-* ``pytest``
-
-* ``pwbs --run-tests``
-
-* ``python -m pwbs --run-tests``
-
-If you make tests keep ordering don't fillout missing numbers.
-Last Documented Test is 5? Then make test 6 not 4 because it's missing number.
+To run tests just run `pwbs test` in the project directory.
 
 ## Templates
 
