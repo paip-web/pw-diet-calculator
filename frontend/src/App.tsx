@@ -13,8 +13,8 @@ export default class App extends React.Component {
         return ['app', ...modules];
     }
     importRoutes() {
-        return App.getAllModules().
-            map(module => (
+        return App.getAllModules()
+            .map(module => (
                 require(`./modules/${module}/Routes.tsx`).default
             ));
     }
