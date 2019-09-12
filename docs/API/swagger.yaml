@@ -53,7 +53,6 @@ paths:
             application/json:
               example:
                 version: "1.0.0"
-                api: "1.0.0"
                 currentVersion: "1.0.0"
       security:
         - petstore_auth:
