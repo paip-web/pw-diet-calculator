@@ -1,6 +1,6 @@
 version: 1
 update_configs:
-  - package_manage: "java:maven"
+  - package_manager: "java:maven"
     directory: "/backend"
     update_schedule: "daily"
   - package_manager: "javascript"
