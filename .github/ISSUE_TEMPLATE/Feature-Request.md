@@ -1,3 +1,12 @@
+---
+name: Feature Request
+about: Create a request for a feature
+title: ''
+labels: enhancement
+assignees: patrykjadamczyk
+
+---
+
 # <!-- Name your feature -->
 
 ## Why

@@ -1,8 +1,8 @@
 ---
-name: Bug report
-about: Create a report to help us improve
+name: Feature Request
+about: Create a request for a feature
 title: ''
-labels: bug
+labels: enhancement, PAiP Web
 assignees: patrykjadamczyk
 
 ---
@@ -20,7 +20,6 @@ assignees: patrykjadamczyk
 
 ## Motivation and Context
 <!--- Why is this change required? What problem does it solve? -->
-<!--- If it fixes an open issue, please link to the issue here. -->
 
 ## How Has This Been Tested
 <!--- Please describe in detail how you tested your changes. -->
