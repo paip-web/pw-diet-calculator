@@ -69,27 +69,3 @@ Before you submit a pull request, check that it meets these guidelines:
 #### Tests
 
 To run tests just run `pwbs test` in the project directory.
-
-## Templates
-
-### Feedback Issue Template
-
-There where in this template is \<Something> that means your data.
-
-Issue ::
-
-    Title | Feedback: <Name or Nick>
-    Description | <Your Feedback and/or Your Feature Proposal>
-    Milestone | NEXT
-    Label | FEEDBACK
-
-### Bug Report Issue Template
-
-There where in this template is <Something> that means your data.
-
-Issue ::
-
-    Title | BUG: <Name of Bug>
-    Description | <Your Information about the bug>
-    Milestone | BUG
-    Label | BUG
