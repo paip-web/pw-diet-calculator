@@ -1,0 +1,15 @@
+{
+  "$schema": "https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_v_0_2.json",
+  "commands": {
+    "test": {
+      "mode": "mc",
+      "commands": [
+        "cd common && pwbs test",
+        "cd backend && pwbs test",
+        "cd frontend && pwbs test",
+        "cd electron && pwbs test",
+        "cd native && pwbs test"
+      ]
+    }
+  }
+}

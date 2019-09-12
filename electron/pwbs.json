@@ -1,0 +1,6 @@
+{
+  "$schema": "https://gitlab.com/paip-web/pwbs/raw/develop/docs/source/schema/PWBS_LCF_v_0_2.json",
+  "commands": {
+    "test": "echo Temporary Command"
+  }
+}
