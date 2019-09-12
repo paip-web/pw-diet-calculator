@@ -49,7 +49,7 @@ export default (
             ...props,
             ...extraProps,
             ...appProps,
-            params: props?.match?.params || {},
+            params: ((props || {}).match || {}).params || {},
         };
 
         return <Component {...newProps} />;
