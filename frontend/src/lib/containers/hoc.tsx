@@ -10,7 +10,7 @@ type mapDispatchFuncType = (dispatch: dispatchType) => object;
 const appProps = {
 };
 
-function mapStateToProps(state: object, mapState: mapStateFuncType) {
+function mapStateToProps(state: any, mapState: mapStateFuncType | null) {
     const appState = {
     };
     if (mapState !== null) {
@@ -23,11 +23,11 @@ function mapStateToProps(state: object, mapState: mapStateFuncType) {
     return appState;
 }
 
-function mapDispatchToProps(dispatch: dispatchType, mapDispatch: mapDispatchFuncType) {
+function mapDispatchToProps(dispatch: dispatchType, mapDispatch: mapDispatchFuncType | null) {
     const appDispatch = {
     };
     if (mapDispatch !== null) {
-        const mappedDispatch = mapDispatch(state);
+        const mappedDispatch = mapDispatch(dispatch);
         return {
             ...appDispatch,
             ...mappedDispatch,
@@ -37,14 +37,14 @@ function mapDispatchToProps(dispatch: dispatchType, mapDispatch: mapDispatchFunc
 }
 
 export default (
-    extraProps: object = {},
+    extraProps: any = {},
     mapState: mapStateFuncType | null = null,
     mapDispatch: mapDispatchFuncType | null = null,
     // @ts-ignore
 ) => (Component: any) => withRouter(connect(
         (dispatch: dispatchType) => mapStateToProps(dispatch, mapState),
         (dispatch: dispatchType) => mapDispatchToProps(dispatch, mapDispatch),
-    )((props: object) => {
+    )((props: any) => {
         const newProps = {
             ...props,
             ...extraProps,
