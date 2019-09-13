@@ -1,0 +1,60 @@
+openapi: 3.0.1
+info:
+  version: "0.0.1"
+  title: "PW Diet Calculator"
+  contact:
+    email: "paipweb@paipweb.com"
+  license:
+    name: "MIT"
+    url: "https://github.com/paip-web/pw-diet-calculator/blob/master/LICENSE"
+servers:
+  -
+    url: "http://pwdiet.api.paipweb.com/api"
+    description: "Production Server HTTP"
+  -
+    url: "https://pwdiet.api.paipweb.com/api"
+    description: "Production Server HTTPS"
+  -
+    url: "http://127.0.0.1:9001/api"
+    description: "Development Server"
+tags:
+  - name: "api"
+    description: "API control Routes"
+  - name: "user"
+    description: "Everything about user"
+  - name: "auth"
+    description: "Authentication to API"
+  - name: "products"
+    description: "Everything about Products"
+  - name: "products-list"
+    description: "Everything about Lists of Products"
+  - name: "dishes"
+    description: "Everything about Dishes"
+  - name: "menus"
+    description: "Everything about Menus"
+  - name: "diet-plans"
+    description: "Everything about Diet Plans"
+  - name: "mass"
+    description: "Everything about Mass of Users"
+  - name: "person"
+    description: "Everything about Personal Info about User"
+paths:
+  /version:
+    get:
+      tags:
+        - "api"
+      summary: "Get version of API"
+      description: ""
+      operationId: "getApiVersion"
+      responses:
+        200:
+          description: "API Version"
+          content:
+            application/json:
+              example:
+                version: "1.0.0"
+                currentVersion: "1.0.0"
+      security:
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
