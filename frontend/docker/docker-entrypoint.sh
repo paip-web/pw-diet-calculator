@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-APACHE_CONF=/etc/apache2/sites-available/000-default.conf
+APACHE_CONF=/etc/apache2/conf.d/http.conf
 
 if [ -f "${APACHE_CONF}" ]; then
 rm "${APACHE_CONF}"
@@ -9,8 +9,8 @@ fi
 cat > "${APACHE_CONF}" <<EOF
 <VirtualHost *:80>
     ServerAdmin paipweb@paipweb.com
-    DocumentRoot /app/public
-    <Directory /app/public>
+    DocumentRoot /app/build
+    <Directory /app/build>
         AllowOverride All
         Require all granted
     </Directory>
@@ -24,5 +24,5 @@ TraceEnable On
 </Directory>
 EOF
 
-a2enmod rewrite
-/usr/sbin/apache2ctl -D FOREGROUND
+# a2enmod rewrite
+/usr/sbin/httpd -D FOREGROUND

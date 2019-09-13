@@ -1,10 +1,7 @@
 FROM node:alpine
 LABEL maintainer="paipweb@paipweb.com"
 
-RUN apt update \
-    && apt install -y build-essential curl gnupg wget software-properties-common apache2 \
-	&& rm -r /var/lib/apt/lists/* \
-    && apt clean
+RUN apk add apache2 openrc
 
 COPY . /app
 WORKDIR /app
@@ -15,4 +12,5 @@ RUN yarn install --frozen-lockfile --non-interactive
 RUN yarn build
 
 COPY ./docker/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
 CMD ["docker-entrypoint"]
