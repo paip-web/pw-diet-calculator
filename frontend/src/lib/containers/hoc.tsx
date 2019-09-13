@@ -42,7 +42,7 @@ export default (
     mapDispatch: mapDispatchFuncType | null = null,
     // @ts-ignore
 ) => (Component: any) => withRouter(connect(
-        (dispatch: dispatchType) => mapStateToProps(dispatch, mapState),
+        (state: any) => mapStateToProps(state, mapState),
         (dispatch: dispatchType) => mapDispatchToProps(dispatch, mapDispatch),
     )((props: any) => {
         const newProps = {
