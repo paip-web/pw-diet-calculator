@@ -1,9 +1,11 @@
-openapi: 3.0.1
+openapi: 3.0.2
 info:
-  version: "0.0.1"
+  version: "0.1.0"
   title: "PW Diet Calculator"
+  description: "API is versioned in routes except one `/version` which is special route available on root without version too and this is only route which have to be perfect at beginning to not change it for compatibility in future."
   contact:
     email: "paipweb@paipweb.com"
+    name: "PAiP Web"
   license:
     name: "MIT"
     url: "https://github.com/paip-web/pw-diet-calculator/blob/master/LICENSE"
@@ -44,17 +46,396 @@ paths:
       tags:
         - "api"
       summary: "Get version of API"
-      description: ""
+      description:  "Get's current version of API"
       operationId: "getApiVersion"
       responses:
         200:
           description: "API Version"
           content:
             application/json:
-              example:
-                version: "1.0.0"
-                currentVersion: "1.0.0"
-      security:
-        - petstore_auth:
-            - "write:pets"
-            - "read:pets"
+              schema:
+                $ref: "#/components/schemas/getApiVersionResponse"
+  /auth/info:
+    get:
+      tags:
+        - "auth"
+      summary: "Get authentication information about user"
+      description:  "Get's current version of API"
+      operationId: "getAuthInfo"
+      security: 
+        - api_auth:
+          - "admin"
+      responses:
+        200:
+          description: "Auth Info"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getAuthInfoResponse"
+  /auth/login:
+    post:
+      tags:
+        - "auth"
+      summary: "Login user"
+      description:  "Login user and returns token"
+      operationId: "loginUser"
+      security: 
+        - api_auth:
+          - "admin"
+      responses:
+        200:
+          description: "Successful Login"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/loginUserResponse"
+        404:
+          description: "User Not Found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/loginUserNotFoundErrorResponse"
+        400:
+          description: "Invalid Password"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/loginUserInvalidPasswordErrorResponse"
+  /user:
+    get:
+      tags:
+        - "user"
+      summary: "Get user information"
+      description:  "Get user information"
+      operationId: "getUser"
+      security: 
+        - api_auth:
+          - "admin"
+          - "user"
+      parameters: 
+        -
+          name: "id"
+          description: "User Indentifier"
+          in: "query"
+          allowEmptyValue: true
+          example: "test"
+          schema:
+            type: string
+      responses:
+        200:
+          description: "User information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoResponse"
+        404:
+          description: "No user found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoErrorResponse"
+        400:
+          description: "Invalid user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoErrorResponse"
+    post:
+      tags:
+        - "user"
+      summary: "Create user"
+      description:  "Create user"
+      operationId: "createUser"
+      security: 
+        - api_auth:
+          - "admin"
+      requestBody:
+        description: "Information about user which you want to add"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userInfoDataModel"
+      responses:
+        200:
+          description: "User information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoResponse"
+        400:
+          description: "Invalid user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoErrorResponse"
+    put:
+      tags:
+        - "user"
+      summary: "Create user or Update user information"
+      description:  "Create user or Update user information"
+      operationId: "createOrUpdateUser"
+      security: 
+        - api_auth:
+          - "admin"
+      requestBody:
+        description: "Information about user which you want to add"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userInfoDataModel"
+      responses:
+        200:
+          description: "User information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoResponse"
+        400:
+          description: "Invalid user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoErrorResponse"
+    patch:
+      tags:
+        - "user"
+      summary: "Update user information"
+      description: "Update user information"
+      operationId: "updateUser"
+      security: 
+        - api_auth:
+          - "admin"
+      requestBody:
+        description: "Information about user which you want to add"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userInfoDataModel"
+      parameters: 
+        -
+          name: "id"
+          description: "User Indentifier"
+          in: "query"
+          allowEmptyValue: true
+          example: "test"
+          schema:
+            type: string
+      responses:
+        200:
+          description: "User information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoResponse"
+        404:
+          description: "No user found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoErrorResponse"
+        400:
+          description: "Invalid user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoErrorResponse"
+    delete:
+      tags:
+        - "user"
+      summary: "Remove user"
+      description:  "Remove user"
+      operationId: "removeUser"
+      security: 
+        - api_auth:
+          - "admin"
+      parameters: 
+        -
+          name: "id"
+          description: "User Indentifier"
+          in: "query"
+          allowEmptyValue: true
+          example: "test"
+          schema:
+            type: string
+      responses:
+        200:
+          description: "User information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoResponse"
+        404:
+          description: "No user found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoErrorResponse"
+        400:
+          description: "Invalid user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoErrorResponse"
+components:
+  securitySchemes:
+    api_auth:
+      type: "apiKey"
+      description: "Basic Authentication through JWT Validation"
+      name: "Authorization"
+      in: "header"
+  schemas:
+    commonErrorResponseModel:
+      description: "Common Error Response Model"
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+          example:
+            - "password:invalid"
+            - "user:notfound"
+    versionObject:
+      description: "Version Object"
+      type: object
+      required:
+        - version
+        - currentVersion
+      properties:
+        version:
+          type: string
+          example: "0.1.0"
+        currentVersion:
+          type: string
+          example: "1.0.0"
+    getApiVersionResponse:
+      description: "API Version"
+      type: object
+      required:
+        - api
+        - spec
+        - version
+        - currentVersion
+      properties:
+        api:
+          $ref: "#/components/schemas/versionObject"
+        spec:
+          $ref: "#/components/schemas/versionObject"
+        version:
+          type: string
+          example: "0.1.0"
+        currentVersion:
+          type: string
+          example: "1.0.0"
+    AuthInfoModel:
+      description: "Authentication Information Data Model"
+      type: object
+      required:
+        - loggedin
+      properties:
+        logged:
+          type: boolean
+          example: true
+        username:
+          type: string
+          example: "paipweb"
+        jwt:
+          type: string
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+        permissions:
+          type: array
+          example:
+            - "admin:all"
+          items:
+            type: string
+    ErrorAuthInfoModel:
+      description: "Minimal Authentication Information Data Model"
+      type: object
+      required:
+        - loggedin
+        - errors
+      properties:
+        logged:
+          type: boolean
+          example: false
+        errors:
+          type: array
+          items:
+            type: string
+          example:
+            - "password:invalid"
+            - "user:notfound"
+    loginUserResponse:
+      $ref: "#/components/schemas/AuthInfoModel"
+    loginUserNotFoundErrorResponse:
+      $ref: "#/components/schemas/ErrorAuthInfoModel"
+    loginUserInvalidPasswordErrorResponse:
+      $ref: "#/components/schemas/ErrorAuthInfoModel"
+    getAuthInfoResponse:
+      $ref: "#/components/schemas/AuthInfoModel"
+    userInfoDataModel:
+      description: "User Information"
+      type: object
+      required:
+        - nickname
+      properties:
+        id:
+          type: string
+          example: "9053f559-dbdb-49fa-ab21-81ae25812ebd"
+          nullable: true
+        name:
+          type: string
+          example: "Patryk"
+          nullable: true
+        surname:
+          type: string
+          example: "Adamczyk"
+          nullable: true
+        nickname:
+          type: string
+          example: "patrykjadamczyk"
+        dateofbirth:
+          type: string
+          example: "2019-02-06"
+          nullable: true
+        weight:
+          type: number
+          example: 52.5
+          nullable: true
+        height:
+          type: number
+          example: 185
+          nullable: true
+    userInfoResponse:
+      description: "User Information"
+      type: object
+      required:
+        - name
+        - surname
+        - nickname
+        - dateofbirth
+        - weight
+        - height
+      properties:
+        name:
+          type: string
+          example: "Patryk"
+        surname:
+          type: string
+          example: "Adamczyk"
+        nickname:
+          type: string
+          example: "patrykjadamczyk"
+        dateofbirth:
+          type: string
+          example: "2019-02-06"
+        weight:
+          type: number
+          example: 52.5
+        height:
+          type: number
+          example: 185
+    userInfoErrorResponse:
+      $ref: "#/components/schemas/commonErrorResponseModel"
