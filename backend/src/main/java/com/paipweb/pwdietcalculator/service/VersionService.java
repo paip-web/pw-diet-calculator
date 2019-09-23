@@ -1,12 +1,12 @@
 package com.paipweb.pwdietcalculator.service;
 
+import com.paipweb.pwdietcalculator.data.VersionData;
+
 public interface VersionService {
 
-    String getVersion();
+    VersionData getApiVersion();
 
-    String getMajorVersion();
+    VersionData getSpecVersion();
 
-    String getMinorVersion();
-
-    String getPatch();
+    VersionData getVersion();
 }
