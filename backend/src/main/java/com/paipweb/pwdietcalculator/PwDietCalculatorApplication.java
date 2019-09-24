@@ -9,5 +9,4 @@ public class PwDietCalculatorApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PwDietCalculatorApplication.class, args);
 	}
-
 }
