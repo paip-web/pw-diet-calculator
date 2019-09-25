@@ -102,44 +102,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/loginUserInvalidPasswordErrorResponse"
   /user:
-    get:
-      tags:
-        - "user"
-      summary: "Get user information"
-      description:  "Get user information"
-      operationId: "getUser"
-      security: 
-        - api_auth:
-          - "admin"
-          - "user"
-      parameters: 
-        -
-          name: "id"
-          description: "User Indentifier"
-          in: "query"
-          allowEmptyValue: true
-          example: "test"
-          schema:
-            type: string
-      responses:
-        200:
-          description: "User information"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/userInfoResponse"
-        404:
-          description: "No user found"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/userInfoErrorResponse"
-        400:
-          description: "Invalid user"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/userInfoErrorResponse"
     post:
       tags:
         - "user"
@@ -196,6 +158,46 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/userInfoErrorResponse"
+  /user/{id}:
+    get:
+      tags:
+        - "user"
+      summary: "Get user information"
+      description:  "Get user information"
+      operationId: "getUser"
+      security: 
+        - api_auth:
+          - "admin"
+          - "user"
+      parameters: 
+        -
+          name: "id"
+          description: "User Indentifier"
+          in: "path"
+          allowEmptyValue: false
+          required: true
+          example: "test"
+          schema:
+            type: string
+      responses:
+        200:
+          description: "User information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoResponse"
+        404:
+          description: "No user found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoErrorResponse"
+        400:
+          description: "Invalid user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoErrorResponse"
     patch:
       tags:
         - "user"
@@ -215,8 +217,9 @@ paths:
         -
           name: "id"
           description: "User Indentifier"
-          in: "query"
-          allowEmptyValue: true
+          in: "path"
+          allowEmptyValue: false
+          required: true
           example: "test"
           schema:
             type: string
@@ -252,8 +255,9 @@ paths:
         -
           name: "id"
           description: "User Indentifier"
-          in: "query"
-          allowEmptyValue: true
+          in: "path"
+          allowEmptyValue: false
+          required: true
           example: "test"
           schema:
             type: string
@@ -263,7 +267,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/userInfoResponse"
+                $ref: "#/components/schemas/commonSuccessResponseModel"
         404:
           description: "No user found"
           content:
@@ -276,6 +280,269 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/userInfoErrorResponse"
+  /product-list/{user}:
+    get:
+      tags:
+        - "products-list"
+      summary: "Get all product lists information"
+      description:  "Get all product lists information"
+      operationId: "getProductLists"
+      security: 
+        - api_auth:
+          - "admin"
+          - "user:current"
+      parameters: 
+        -
+          name: "user"
+          description: "Product List Owner"
+          in: "path"
+          allowEmptyValue: false
+          required: true
+          example: "8815223e-2bdf-4f72-8b71-f9a07f5bb3ee"
+          schema:
+            type: string
+      responses:
+        200:
+          description: "Product Lists information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getAllUserProductListResponse"
+        204:
+          description: "No product lists found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/getAllUserProductListEmptyResponse"
+        404:
+          description: "No user found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/productListErrorResponse"
+    post:
+      tags:
+        - "products-list"
+      summary: "Create product list"
+      description:  "Create product list"
+      operationId: "createUserProductList"
+      security: 
+        - api_auth:
+          - "admin"
+          - "user:current"
+      parameters: 
+        -
+          name: "user"
+          description: "Product List Owner"
+          in: "path"
+          allowEmptyValue: false
+          required: true
+          example: "8815223e-2bdf-4f72-8b71-f9a07f5bb3ee"
+          schema:
+            type: string
+      requestBody:
+        description: "Information about product list which you want to add"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createUserProductListRequest"
+      responses:
+        200:
+          description: "Created Product List information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userProductListResponse"
+        400:
+          description: "Invalid data"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/productListErrorResponse"
+    put:
+      tags:
+        - "products-list"
+      summary: "Create or Update product list information"
+      description:  "Create or Update product list information"
+      operationId: "createOrUpdateUserProductList"
+      security: 
+        - api_auth:
+          - "admin"
+          - "user:current"
+      parameters: 
+        -
+          name: "user"
+          description: "Product List Owner"
+          in: "path"
+          allowEmptyValue: false
+          required: true
+          example: "8815223e-2bdf-4f72-8b71-f9a07f5bb3ee"
+          schema:
+            type: string
+      requestBody:
+        description: "Information about product list which you want to add"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createUserProductListRequest"
+      responses:
+        200:
+          description: "Created Product List information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userProductListResponse"
+        400:
+          description: "Invalid data"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/productListErrorResponse"
+  /product-list/{user}/{id}:
+    get:
+      tags:
+        - "products-list"
+      summary: "Get specific product list information"
+      description:  "Get specific product list information"
+      operationId: "getUserProductList"
+      security: 
+        - api_auth:
+          - "admin"
+          - "user:current"
+      parameters: 
+        -
+          name: "user"
+          description: "Product List Owner"
+          in: "path"
+          allowEmptyValue: false
+          required: true
+          example: "8815223e-2bdf-4f72-8b71-f9a07f5bb3ee"
+          schema:
+            type: string
+        -
+          name: "id"
+          description: "Product List Indentifier"
+          in: "path"
+          allowEmptyValue: false
+          required: true
+          example: "test"
+          schema:
+            type: string
+      responses:
+        200:
+          description: "User information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userProductListResponse"
+        404:
+          description: "Not found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/productListErrorResponse"
+    patch:
+      tags:
+        - "products-list"
+      summary: "Update product list information"
+      description: "Update product list information"
+      operationId: "updateUserProductList"
+      security: 
+        - api_auth:
+          - "admin"
+          - "user:current"
+      parameters: 
+        -
+          name: "user"
+          description: "Product List Owner"
+          in: "path"
+          allowEmptyValue: false
+          required: true
+          example: "8815223e-2bdf-4f72-8b71-f9a07f5bb3ee"
+          schema:
+            type: string
+        -
+          name: "id"
+          description: "Product List Indentifier"
+          in: "path"
+          allowEmptyValue: false
+          required: true
+          example: "test"
+          schema:
+            type: string
+      requestBody:
+        description: "Information about product list which you want to add"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createUserProductListRequest"
+      responses:
+        200:
+          description: "Updated Product List information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userProductListResponse"
+        400:
+          description: "Invalid data"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/productListErrorResponse"
+        404:
+          description: "No product list found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/productListErrorResponse"
+    delete:
+      tags:
+        - "products-list"
+      summary: "Remove product list"
+      description:  "Remove product list"
+      operationId: "removeUserProductList"
+      security: 
+        - api_auth:
+          - "admin"
+          - "user:current"
+      parameters: 
+        -
+          name: "user"
+          description: "Product List Owner"
+          in: "path"
+          allowEmptyValue: false
+          required: true
+          example: "8815223e-2bdf-4f72-8b71-f9a07f5bb3ee"
+          schema:
+            type: string
+        -
+          name: "id"
+          description: "Product List Indentifier"
+          in: "path"
+          allowEmptyValue: false
+          required: true
+          example: "test"
+          schema:
+            type: string
+      responses:
+        200:
+          description: "Created Product List information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/commonSuccessResponseModel"
+        400:
+          description: "Invalid data"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/productListErrorResponse"
+        404:
+          description: "No product list found"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/productListErrorResponse"
 components:
   securitySchemes:
     api_auth:
@@ -297,6 +564,16 @@ components:
           example:
             - "password:invalid"
             - "user:notfound"
+    commonSuccessResponseModel:
+      description: "Common Success Response Model"
+      type: object
+      required:
+        - success
+      properties:
+        success:
+          type: boolean
+          example: true
+          default: true
     versionObject:
       description: "Version Object"
       type: object
@@ -439,3 +716,79 @@ components:
           example: 185
     userInfoErrorResponse:
       $ref: "#/components/schemas/commonErrorResponseModel"
+    productListErrorResponse:
+      $ref: "#/components/schemas/commonErrorResponseModel"
+    ProductDataModel: # TODO: Mocked Model replace with proper one
+      description: "Product Data Model"
+      type: object
+    userProductListResponse:
+      description: "User Product List Information"
+      type: object
+      required:
+        - name
+        - products
+      properties:
+        name:
+          type: string
+          example: "Product List 1"
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductDataModel"
+    ProductListMiniModel:
+      description: "Product List Information"
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          example: "4819f267-6ec9-4819-9fd9-4d17a295e787"
+        name:
+          type: string
+          example: "Product List 1"
+    createUserProductListRequest:
+      description: "Product List Information"
+      type: object
+      required:
+        - id
+        - name
+        - products
+      properties:
+        id:
+          type: string
+          example: "4819f267-6ec9-4819-9fd9-4d17a295e787"
+        name:
+          type: string
+          example: "Product List 1"
+        products:
+          type: array
+          items:
+            type: string
+            description: "Identifier of Product"
+          example:
+            - "70e8f76e-04c3-43c8-a752-2c4d95aac15b"
+    getAllUserProductListResponse:
+      description: "Get All User Product Lists Information"
+      type: object
+      required:
+        - lists
+      properties:
+        lists:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductListMiniModel"
+    getAllUserProductListEmptyResponse:
+      description: "Get All User Product Lists Empty Information"
+      type: object
+      required:
+        - lists
+      properties:
+        lists:
+          type: array
+          items:
+            type: string
+            nullable: true
+          maxItems: 0
+          example: []
